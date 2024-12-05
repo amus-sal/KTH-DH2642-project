@@ -1,0 +1,177 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+.login-input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #005f73;
+    color: white;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #0a9396;
+}
+
+.login-link {
+    color: #0a9396;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+.signup-input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.signup-button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #005f73;
+    color: white;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: #0a9396;
+}
+
+.signup-link {
+    color: #0a9396;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .home-header {
+    display: flex;
+    justify-content: space-between; /* Space out the content */
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-left: 10px;
+  }
+  
+  .logout-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .tabs-navigation {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .tab-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .tab-button.active {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .tab-content {
+    padding: 20px;
+  }
+.account-info, .documents, .chat, .history {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .logout-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .logout-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+  }
