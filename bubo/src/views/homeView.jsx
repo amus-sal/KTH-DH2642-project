@@ -9,6 +9,10 @@ const HomeView = ({ activeTab, setActiveTab, accountInfo, documents, chat, histo
     navigate("/login");  
   };
 
+  function handleChatCB(){
+    navigate("/chat");
+  }
+
   return (
     <div className="home-container">
       {/* Header with Logo and Logout Button */}
@@ -39,7 +43,7 @@ const HomeView = ({ activeTab, setActiveTab, accountInfo, documents, chat, histo
         </button>
         <button
           className={`tab-button ${activeTab === "chat" ? "active" : ""}`}
-          onClick={() => setActiveTab("chat")}
+          onClick={() => handleChatCB()}
         >
           Chat
         </button>

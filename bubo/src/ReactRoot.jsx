@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import SignupPresenter from "./presenters/signupPresenter";
 import LoginPresenter from "./presenters/loginPresenter";
 import HomePresenter from "./presenters/homePresenter";
+import ChatPresenter from "./presenters/chatPresenter";
 
 export function makeRouter(model) {
   return createHashRouter([
@@ -18,6 +19,10 @@ export function makeRouter(model) {
       path: "/signup",
       element: <SignupPresenter model={model} />,
     },
+    {
+      path:"/chat",
+      element: <ChatPresenter model={model}/>
+    }
   ]);
 }
 
