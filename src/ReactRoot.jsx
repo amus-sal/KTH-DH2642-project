@@ -4,15 +4,14 @@ import { observer } from "mobx-react-lite";
 import SignupPresenter from "./presenters/signupPresenter";
 import LoginPresenter from "./presenters/loginPresenter";
 import HomePresenter from "./presenters/homePresenter";
-import ChatPresenter from "./presenters/chatPresenter";
 
 export function makeRouter(models) {
 
   const { authModel, chatModel } = models;
   return createHashRouter([
-    // { path: "/",
-    // element: authModel.isAuthenticated ? <HomePresenter model={authModel} /> : <LoginPresenter model={authModel} /> 
-    // },
+    { path: "/",
+    element: authModel.isAuthenticated ? <HomePresenter model={authModel} chatModel={chatModel} /> : <LoginPresenter model={authModel} /> 
+    },
     {
       path: "/login",
       element: <LoginPresenter model={authModel} />,
@@ -21,10 +20,7 @@ export function makeRouter(models) {
       path: "/signup",
       element: <SignupPresenter model={authModel} />,
     },
-    {
-      path:"/",
-      element: <ChatPresenter model={chatModel}/>
-    }
+
   ]);
 }
 

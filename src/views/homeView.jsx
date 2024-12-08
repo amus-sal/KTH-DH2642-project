@@ -9,9 +9,7 @@ const HomeView = ({ activeTab, setActiveTab, accountInfo, documents, chat, histo
     navigate("/login");  
   };
 
-  function handleChatCB(){
-    navigate("/chat");
-  }
+
 
   return (
     <div className="home-container">
@@ -43,7 +41,7 @@ const HomeView = ({ activeTab, setActiveTab, accountInfo, documents, chat, histo
         </button>
         <button
           className={`tab-button ${activeTab === "chat" ? "active" : ""}`}
-          onClick={() => handleChatCB()}
+          onClick={() => setActiveTab("chat")}
         >
           Chat
         </button>

@@ -2,8 +2,9 @@ import React from "react";
 import HomeView from "../views/homeView";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import ChatTab from "./chatPresenter"; 
 
-const HomePresenter = observer(({ model }) => {
+const HomePresenter = observer(({ model, chatModel }) => {
     const navigate =  useNavigate()
   const uploadDocument = (file) => {
     if (file) {
@@ -24,6 +25,7 @@ const HomePresenter = observer(({ model }) => {
       accountInfo={{ email: model.email }}
       documents={model.documents}
       history={model.history}
+      chat={<ChatTab chatModel={chatModel} />}
       uploadDocument={uploadDocument}
       activeTab={model.activeTab} 
       setActiveTab={setActiveTab} 

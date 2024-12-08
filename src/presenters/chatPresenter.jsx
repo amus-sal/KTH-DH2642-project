@@ -4,7 +4,10 @@ import { observer } from "mobx-react-lite";
 
 import ChatView from "../views/tabs/ChatView";
 
-const ChatTab = observer(({model}) => {
+const ChatTab = observer(({chatModel}) => {
+  if (!chatModel) {
+    return <div>Error: Chat model is not initialized.</div>;
+  }
   const handleSend = async (message) => {
     const userMessage = {
       message,
@@ -12,14 +15,14 @@ const ChatTab = observer(({model}) => {
       direction: "outgoing",
     };
 
-    model.addMessage(userMessage);
-    await model.processMessage(process.env.REACT_APP_OPENAI_API_KEY);
+    chatModel.addMessage(userMessage);
+    await chatModel.processMessage(process.env.REACT_APP_OPENAI_API_KEY);
   };
 
   return (
     <ChatView
-      messages={model.messages}
-      typing={model.typing}
+      messages={chatModel.messages}
+      typing={chatModel.typing}
       onSend={handleSend}
     />
   );
