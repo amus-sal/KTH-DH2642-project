@@ -6,22 +6,24 @@ import LoginPresenter from "./presenters/loginPresenter";
 import HomePresenter from "./presenters/homePresenter";
 import ChatPresenter from "./presenters/chatPresenter";
 
-export function makeRouter(model) {
+export function makeRouter(models) {
+
+  const { authModel, chatModel } = models;
   return createHashRouter([
     { path: "/",
-    element: model.isAuthenticated ? <HomePresenter model={model} /> : <LoginPresenter model={model} /> 
+    element: authModel.isAuthenticated ? <HomePresenter model={authModel} /> : <LoginPresenter model={authModel} /> 
     },
     {
       path: "/login",
-      element: <LoginPresenter model={model} />,
+      element: <LoginPresenter model={authModel} />,
     },
     {
       path: "/signup",
-      element: <SignupPresenter model={model} />,
+      element: <SignupPresenter model={authModel} />,
     },
     {
       path:"/chat",
-      element: <ChatPresenter model={model}/>
+      element: <ChatPresenter model={chatModel}/>
     }
   ]);
 }
@@ -29,7 +31,7 @@ export function makeRouter(model) {
 const ReactRoot = observer(function ReactRender(props) {
   return (
     <div>
-      <RouterProvider router={makeRouter(props.model)} />
+      <RouterProvider router={makeRouter(props.models)} />
     </div>
   );
 });

@@ -2,6 +2,7 @@ import { makeObservable, observable, action } from "mobx";
 import { signup ,login} from "../services/authService";  
 
 class AuthModel {
+  messages = []
   email = "";
   password = "";
   error = "";
@@ -76,6 +77,7 @@ class AuthModel {
       console.error(err.message);
     }
   }
+
 }
 
 const authModel = new AuthModel();
