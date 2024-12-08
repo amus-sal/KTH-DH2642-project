@@ -9,7 +9,10 @@ class ChatModel {
   constructor() {
     makeAutoObservable(this);
   }
-
+  reset() {
+    this.messages = [];
+    this.typing = false;
+  }
   addMessage(message) {
     this.messages.push(message);
   }

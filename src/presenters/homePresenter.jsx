@@ -18,6 +18,9 @@ const HomePresenter = observer(({ model, chatModel }) => {
   };
 
   const setActiveTab = (tabName) => {
+    if (model.activeTab === "chat" && tabName !== "chat") {
+      chatModel.reset();
+    }
     model.setActiveTab(tabName); 
   };
   return (
