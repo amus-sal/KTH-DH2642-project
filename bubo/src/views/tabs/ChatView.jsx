@@ -1,87 +1,93 @@
 import React from "react";
-import 'stream-chat-react/dist/css/v2/index.css';
-import { Chat, ChannelList, Channel, Window, ChannelHeader, MessageList, MessageInput, Thread } from "stream-chat-react";
-// import {useCreateChatClient } from 'stream-chat-react';
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
+import {MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from '@chatscope/chat-ui-kit-react';
 import { useState, useEffect } from 'react';
-import { StreamChat } from "stream-chat";
-// import { LoadingIndicator } from "stream-chat-react-native";
 
-// your Stream app information
-const apiKey = process.env.REACT_APP_STREAM_API_KEY;
-const userId = 'nat';
-const userName = 'Natassa';
-
-const user = {
-  id: userId,
-  name: userName,
-  image:
-    'https://vignette.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png',
-};
-
-// const sort = { last_message_at: -1 };
-// const filters = {
-//   type: 'messaging',
-//   members: { $in: [userId] },
-// };
-// const options = {
-//   limit: 10,
-// };
-
-
-// import { useCreateChatClient, Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
-
-// import 'stream-chat-react/dist/css/v2/index.css';
-
+const OPENAI_API_KEY = "sk-JHWzCuBmHwpASR7-BkaFgaXLDctwppNshD5jdULc0XT3BlbkFJK_IEB9Sj_EkIangm8kBaLMtw2QJVM7_ubD1DFdtV0A";
 
 const ChatTab = () => {
-  const [channel, setChannel] =  useState();
-  const [client, setClient] = useState();
-  
+    const [typing, setTyping] = useState(false);
+    const [messages, setMessages] = useState([
+        {message:"Hello, I am chatGPT", sender:"chatGPT", direction:"incoming"}
+    ]);
 
-  useEffect(() => {
-    async function init(){
-      const chatClient = StreamChat.getInstance(apiKey);
-      await chatClient.connectUser(user, chatClient.devToken(user.id));
-      const channel = chatClient.channel('livestream', 'spacex', {
-        image: 'https://goo.gl/Zefkbx',
-        name: 'SpaceX launch discussion',
-        members:[user.id]
-      });
-      await channel.watch();  
-
-      setChannel(channel);
-      setClient(chatClient);  
+    const handleSend = async (message)=>{
+        const newMessage = {
+            message:message,
+            sender:"user",
+            direction: "outgoing"
+        }
+        const newMessages = [...messages, newMessage];
+        // update messages state
+        setMessages(newMessages);
+        // send to chat gpt
+        setTyping(true);
+        await processMessage(newMessages);
     }
-    init();
-    if (client) return ()=>client.disconnectUser()
 
-  },[])
+    async function processMessage(chatMessages){
+        
+        let apiMessages = chatMessages.map((messageObj) =>{
+            console.log("messageObj: " + messageObj.role);
+            let role = "";
+            let direction="";
+            if (messageObj.sender==="assistant"){
+                role = "assistant";
+                direction = "incoming";
+            }
+            else{
+                role = "user";
+                direction = "outgoing";
+            }
+            return {"role":role, "content": messageObj.message, "direction":direction};
+        });
 
-  if (!channel || !client) return <h1>Loading</h1>;
-    
-  return (
-    <Chat client={client}>
-      <Channel channel={channel}>
-        <Window>
-          <ChannelHeader />
-          <MessageList />
-          <MessageInput />
-        </Window>
-        <Thread />
-      </Channel>
-    </Chat>
-  );
-};
+        const systemMessage = {
+            role:"system",
+            content: "You are an assistant for employees of a company. Answer accuratelly and cheerfully"
+        }
+
+        const apiRequestBody = {
+            "model": "gpt-3.5-turbo",
+            "messages": [systemMessage,...apiMessages]
+        }
+        await fetch("https://api.openai.com/v1/chat/completions",{
+            method:"POST",
+            headers: {
+                "Authorization": "Bearer " + OPENAI_API_KEY,
+                "Content-Type":"application/json"     
+            },
+            body: JSON.stringify(apiRequestBody)
+        }).then((data)=>{
+            return data.json();
+        }).then((data)=>{
+            console.log(data.choices[0].message.content);
+            setMessages([...chatMessages, {message:data.choices[0].message.content, sender:"assistant", direction:"incoming"}])
+        })
+        setTyping(false);
+
+    }
+
+    return (
+        <div style={{position:"relative", height:"800px", width: "700px"}}>
+            <MainContainer>
+                <ChatContainer>
+                    <MessageList 
+                    scrollBehavior="smooth"
+                    typingIndicator= { typing ? <TypingIndicator content="assistant typing"/>: null}>
+                        {messages.map((message, i)=>
+                            {
+                                return <Message key={i} model={message}/>
+                            }
+                        )
+                        }
+                    </MessageList>
+                    <MessageInput placeholder='Type message here' onSend={handleSend}></MessageInput>
+                </ChatContainer>
+            </MainContainer>
+
+        </div>
+    );
+}
 
 export default ChatTab;
-
-// const ChatView = () => {
-//   return (
-//     <div className="tab-content">
-//       <h3>Chat</h3>
-//       <p>Chat functionality coming soon!</p>
-//     </div>
-//   );
-// };
-
-// export default ChatView;
