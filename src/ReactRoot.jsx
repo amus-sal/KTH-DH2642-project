@@ -10,9 +10,9 @@ export function makeRouter(models) {
 
   const { authModel, chatModel } = models;
   return createHashRouter([
-    { path: "/",
-    element: authModel.isAuthenticated ? <HomePresenter model={authModel} /> : <LoginPresenter model={authModel} /> 
-    },
+    // { path: "/",
+    // element: authModel.isAuthenticated ? <HomePresenter model={authModel} /> : <LoginPresenter model={authModel} /> 
+    // },
     {
       path: "/login",
       element: <LoginPresenter model={authModel} />,
@@ -22,7 +22,7 @@ export function makeRouter(models) {
       element: <SignupPresenter model={authModel} />,
     },
     {
-      path:"/chat",
+      path:"/",
       element: <ChatPresenter model={chatModel}/>
     }
   ]);
