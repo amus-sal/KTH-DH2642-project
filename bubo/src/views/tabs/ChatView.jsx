@@ -3,7 +3,7 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from '@chatscope/chat-ui-kit-react';
 import { useState, useEffect } from 'react';
 
-const OPENAI_API_KEY = "sk-JHWzCuBmHwpASR7-BkaFgaXLDctwppNshD5jdULc0XT3BlbkFJK_IEB9Sj_EkIangm8kBaLMtw2QJVM7_ubD1DFdtV0A";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 const ChatTab = () => {
     const [typing, setTyping] = useState(false);
