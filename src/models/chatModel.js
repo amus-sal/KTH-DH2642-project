@@ -1,75 +1,42 @@
-import { makeObservable, observable, action } from "mobx";
+// models/chatModel.js
+import { makeAutoObservable } from "mobx";
+import chatService from "../services/chatService";
 
 class ChatModel {
-  messages = [
-    { message: "Hello, I am chatGPT", sender: "chatGPT", direction: "incoming" }
-  ];
+  messages = [];
   typing = false;
 
   constructor() {
-    makeObservable(this, {
-      messages: observable,
-      typing: observable,
-      addMessage: action,
-      setTyping: action,
-      processMessage: action,
-    });
+    makeAutoObservable(this);
   }
 
-  addMessage(newMessage) {
-    this.messages.push(newMessage);
-  }
-
-  setTyping(isTyping) {
-    this.typing = isTyping;
+  addMessage(message) {
+    this.messages.push(message);
   }
 
   async processMessage(apiKey) {
-    const systemMessage = {
-      role: "system",
-      content: "You are an assistant for employees of a company. Answer accurately and cheerfully."
-    };
-
-    // Translate the user input to ChatGPT api input schema
-    const apiMessages = this.messages.map((msg) => ({
-      role: msg.sender === "chatGPT" ? "assistant" : "user",
-      content: msg.message,
-    }));
-
-    // Synthesize request
-    const apiRequestBody = {
-      model: "gpt-3.5-turbo",
-      messages: [systemMessage, ...apiMessages],
-    };
-
-    this.setTyping(true);
-
+    this.typing = true;
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiRequestBody),
-      });
+      const userMessage = this.messages[this.messages.length - 1];
+      const response = await chatService.sendMessage(apiKey, userMessage.message);
 
-      const data = await response.json();
-      const assistantMessage = {
-        message: data.choices[0].message.content,
-        sender: "chatGPT",
+      const botMessage = {
+        message: response,
+        sender: "bot",
         direction: "incoming",
       };
-
-      this.addMessage(assistantMessage);
+      this.addMessage(botMessage);
     } catch (error) {
-      console.error("Error processing message:", error);
+      this.addMessage({
+        message: "An error occurred. Please try again.",
+        sender: "bot",
+        direction: "incoming",
+      });
     } finally {
-      this.setTyping(false);
+      this.typing = false;
     }
   }
 }
 
 const chatModel = new ChatModel();
 export default chatModel;
-
