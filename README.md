@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with Bubo
 Bubo is a web-based application designed to help users manage documents, communicate effectively, and track history within a streamlined interface. The platform allows users to create accounts, log in, and seamlessly navigate through key features such as uploading and organizing documents, integrating with OpenAI-based chatbot and saving the chat history, and viewing their activity history. Built using React, MobX, and React Router, the application emphasizes clean state management and a user-friendly experience.
 
 ## Structure
