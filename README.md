@@ -1,10 +1,43 @@
 # Getting Started with Create React App
+Bubo is a web-based application designed to help users manage documents, communicate effectively, and track history within a streamlined interface. The platform allows users to create accounts, log in, and seamlessly navigate through key features such as uploading and organizing documents, integrating with OpenAI-based chatbot and saving the chat history, and viewing their activity history. Built using React, MobX, and React Router, the application emphasizes clean state management and a user-friendly experience.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Structure
+src/
+|-- Models/       
+|-- views/             
+|   |--Tabs 
+|      |-- ChatTab 
+|   |-- LoginView.js
+|   |-- HomeView.js
+|   |-- SignupView.js
+|-- presenters/        
+|   |-- ChatPresenter.js
+|   |-- LoginPresenter.js
+|   |-- SignupPresenter.js
+|-- services/          
+|   |-- firebase.js     # Firebase configuration
+|   |-- authService.js  # Auth functions
+|   |-- chatService.js  # Question handling logic
+|-- App.js
+|-- index.js
 
-## Available Scripts
 
-In the project directory, you can run:
+## What We Have Done
+Implemented a signup and login system using Firebase Authentication.
+Created a MobX-based model for state management, ensuring reactive data flow throughout the app.
+Developed a structured interface with a home page comprising four tabs:
+Account Info: Displays user details.
+Chat: Chatbot interface powered by OpenAI, integrated to answer queries.
+Integrated OpenAI API for chat functionality.
+
+## What We Still Plan to Do
+History: Displays the most recent verified answers and their related questions.
+Saved chat history and verified answers in Firebase for easy retrieval.
+Support document upload functions.
+
+## prepare .env
+REACT_APP_FIREBASE_API_KEY=your-firebase-api-key
+REACT_APP_OPENAI_API_KEY=your-openai-api-key
 
 ### `npm start`
 
@@ -14,10 +47,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -26,45 +55,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
