@@ -175,3 +175,10 @@
   .logout-button:hover {
     background-color: #c0392b;
   }
+
+  .chat { 
+    position: "relative";
+    height: "500px";
+    width: "700px";
+    /* margin: "0 auto";  */
+  }

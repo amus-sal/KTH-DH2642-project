@@ -5,7 +5,7 @@ import {MainContainer, ChatContainer, MessageList, Message, MessageInput, Typing
 function ChatView({ messages, typing, onSend }) {
 
     return (
-        <div style={{ position: "relative", height: "800px", width: "700px" }}>
+      <div sclassName="chat">
           <MainContainer>
             <ChatContainer>
               <MessageList
