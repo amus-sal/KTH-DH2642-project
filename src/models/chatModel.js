@@ -5,6 +5,7 @@ import chatService from "../services/chatService";
 class ChatModel {
   messages = [];
   typing = false;
+  verificationClicked=false
 
   constructor() {
     makeAutoObservable(this);
@@ -42,6 +43,7 @@ class ChatModel {
 
   async saveVerifiedQA(verifiedMessage) {
     try {
+      this.verificationClicked=true;
       // Find the index of the verified message in the messages list
       const messageIndex = this.messages.findIndex(
         (msg) => msg.message === verifiedMessage.message
@@ -67,7 +69,7 @@ class ChatModel {
       // const questionAnswerContent = `Question: ${questionMessage.message}\nAnswer: ${verifiedMessage.message}`;
       console.log("Question: " + questionMessage.message);
       console.log("Answer: " + verifiedMessage.message);
-
+      this.verificationClicked=false;
       // // Create a unique file name for this Q&A pair
       // const timestamp = Date.now();
       // const fileName = `verified-qa/${timestamp}.txt`;
