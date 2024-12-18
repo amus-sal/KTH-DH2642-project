@@ -182,3 +182,49 @@
     width: "700px";
     /* margin: "0 auto";  */
   }
+
+  
+  /* Add this to your CSS */
+.message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.verify-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Adds space between the message and the button */
+}
+
+.verify-button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition */
+  width: 80px;  /* Box width */
+  height: 40px; /* Box height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* When the button is clicked and becomes a circle */
+.verify-button.circle {
+  width: 40px;  /* Circle width */
+  height: 40px; /* Circle height */
+  border-radius: 50%; /* Makes it a circle */
+  padding: 0; /* Remove padding */
+}
+
+/* Button text changes after click (check mark) */
+.verify-button.box {
+  border-radius: 5px; /* Slightly rounded corners for box */
+  background-color: grey;
+}
+
+

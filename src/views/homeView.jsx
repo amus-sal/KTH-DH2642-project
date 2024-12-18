@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomeView = ({ activeTab, setActiveTab, accountInfo, documents, chat, history, onLogout }) => {
