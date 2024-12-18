@@ -22,10 +22,11 @@ function VerifyButton({ message, onVerify }) {
     </div>
   );
 }
-
-function ChatView({ messages, typing, onSend }) {
-    const handleVerifyMessage = async (message) => {
+// { messages, typing, onSend }
+function ChatView(props) {
+    const handleVerifyMessageCB = async (message) => {
       console.log("verified");
+      
     }
     
     return (
@@ -33,21 +34,21 @@ function ChatView({ messages, typing, onSend }) {
         <MainContainer>
           <ChatContainer>
             <MessageList
-              typingIndicator={typing ? <TypingIndicator content="assistant typing" /> : null}
+              typingIndicator={props.typing ? <TypingIndicator content="assistant typing" /> : null}
             >
-              {messages.map((message, i) => (
+              {props.messages.map((message, i) => (
                 <div key={i} className="message-container">
                   <Message model={message} />
 
                   {/* Render the button only for incoming messages */}
                   {message.direction === "incoming" && (
-                    <VerifyButton message={message} onVerify={handleVerifyMessage} />
+                    <VerifyButton message={message} onVerify={handleVerifyMessageCB} />
                   )}
 
                 </div>
               ))}
             </MessageList>
-            <MessageInput placeholder="Type message here" onSend={onSend} />
+            <MessageInput placeholder="Type message here" onSend={props.onSend} />
           </ChatContainer>
         </MainContainer>
       </div>
