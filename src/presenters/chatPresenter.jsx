@@ -18,12 +18,15 @@ const ChatTab = observer(({chatModel}) => {
     chatModel.addMessage(userMessage);
     await chatModel.processMessage(process.env.REACT_APP_OPENAI_API_KEY);
   };
-
+  const verifyAnswer = async (verifiedAnswer) => {
+    chatModel.saveVerifiedQA(verifiedAnswer)
+  }
   return (
     <ChatView
       messages={chatModel.messages}
       typing={chatModel.typing}
       onSend={handleSend}
+      onVerify={verifyAnswer}
     />
   );
 });
