@@ -19,11 +19,12 @@ function modelToPersistence(question, answer){
 }
 
 function persistenceToModel(data, model) {
-    console.log("DATA: ", data);    
     function saveToModelACB(data) {
         model.verifiedMessages.push({"question":data.Question, "answer": data.Answer});
     }
-    Object.values(data).map(saveToModelACB);
+    if (data){
+        Object.values(data).map(saveToModelACB);
+    }
     return;
 }
 
@@ -35,7 +36,6 @@ function saveToFirebase(chatModel) {
     }
     set(rf, {"model": []});
     (chatModel.verifiedMessages).map(transformerCB);
-    // console.log("Saved message with question: "+ Question +  " Answer: " + Answer + " ID: " + Id );
 }
 
  function readFromFirebase(chatModel) {
@@ -45,7 +45,6 @@ function saveToFirebase(chatModel) {
         
     // })
     return get(rf).then(function convertACB(data){
-        console.log("data.val(): " + data.val());
         return persistenceToModel(data.val(), chatModel);
     })
 }
@@ -66,7 +65,6 @@ function connectToFirebase(chatModel,  watchFunction) {
     }
     readFromFirebase(chatModel)
     console.log("Database connected");
-    console.log("chatModel verified are: " + chatModel.verifiedMessages);
     watchFunction(checkACB, sideEffectACB)
 }
 

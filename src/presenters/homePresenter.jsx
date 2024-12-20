@@ -18,7 +18,7 @@ const HomePresenter = observer(({ model, chatModel }) => {
   };
 
   const setActiveTab = (tabName) => {
-    if (model.activeTab === "chat" && tabName !== "chat") {
+    if (chatModel.messages.length>10) {
       chatModel.reset();
     }
     model.setActiveTab(tabName); 
@@ -26,7 +26,6 @@ const HomePresenter = observer(({ model, chatModel }) => {
   return (
     <HomeView
       accountInfo={{ email: model.email }}
-      documents={model.documents}
       history={<HistoryTab chatModel={chatModel}/>}
       chat={<ChatTab chatModel={chatModel} />}
       uploadDocument={uploadDocument}
@@ -37,5 +36,6 @@ const HomePresenter = observer(({ model, chatModel }) => {
     />
   );
 });
+// documents={model.documents}
 
 export default HomePresenter;

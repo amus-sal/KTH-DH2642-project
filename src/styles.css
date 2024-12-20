@@ -178,9 +178,9 @@
 
   .chat { 
     position: "relative";
-    height: "500px";
+    height: "800px";
     width: "700px";
-    /* margin: "0 auto";  */
+    margin: "0 auto";  
   }
 
   

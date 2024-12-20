@@ -25,9 +25,7 @@ function VerifyButton({ message, onVerify }) {
 
 function ChatView(props) {
     const handleVerifyMessageCB = async (message) => {
-      props.onVerify(message);
-      console.log("verified");
-      
+      props.onVerify(message);      
     }
     
     return (

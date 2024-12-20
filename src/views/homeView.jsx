@@ -32,12 +32,12 @@ const HomeView = ({ activeTab, setActiveTab, accountInfo, documents, chat, histo
         >
           Account Info
         </button>
-        <button
+        {/* <button
           className={`tab-button ${activeTab === "documents" ? "active" : ""}`}
           onClick={() => setActiveTab("documents")}
         >
           Documents
-        </button>
+        </button> */}
         <button
           className={`tab-button ${activeTab === "chat" ? "active" : ""}`}
           onClick={() => setActiveTab("chat")}

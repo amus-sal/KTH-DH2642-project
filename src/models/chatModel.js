@@ -20,6 +20,8 @@ class ChatModel {
   }
 
   async processMessage(apiKey) {
+    console.log("chatModel verified are: " + this.verifiedMessages);
+
     this.typing = true;
     try {
       const userMessage = this.messages[this.messages.length - 1];
@@ -39,7 +41,9 @@ class ChatModel {
       });
     } finally {
       this.typing = false;
+      console.log("messages: " + this.messages);
     }
+
   }
 
   async saveVerifiedQA(verifiedMessage, dbModel) {
@@ -75,5 +79,4 @@ class ChatModel {
   
 }
 
-const chatModel = new ChatModel();
-export default chatModel;
+export default ChatModel;
