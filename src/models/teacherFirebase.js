@@ -9,7 +9,7 @@ try{
 }catch(e){
     z=y;
 }
-const { getDatabase, ref, get, set, onValue, child, onChildAdded, onChildRemoved, off} =z;
-export  { getDatabase, ref, get, set, onValue, child, onChildAdded, onChildRemoved, off};
+const { getDatabase, ref, get, set, onValue, child, onChildAdded, onChildRemoved, off, push} =z;
+export  { getDatabase, ref, get, set, onValue, child, onChildAdded, onChildRemoved, off, push};
 
 

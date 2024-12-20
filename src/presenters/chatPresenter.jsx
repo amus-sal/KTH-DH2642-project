@@ -1,5 +1,3 @@
-// presenters/ChatTab.js
-import React from "react";
 import { observer } from "mobx-react-lite";
 
 import ChatView from "../views/tabs/ChatView";

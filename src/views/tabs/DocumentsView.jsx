@@ -1,5 +1,3 @@
-import React from "react";
-
 const DocumentsView = ({ documents, uploadDocument }) => {
   return (
     <div className="tab-content">

@@ -6,6 +6,7 @@ class ChatModel {
   messages = [];
   typing = false;
   verificationClicked=false
+  verifiedMessages = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -41,9 +42,8 @@ class ChatModel {
     }
   }
 
-  async saveVerifiedQA(verifiedMessage) {
+  async saveVerifiedQA(verifiedMessage, dbModel) {
     try {
-      this.verificationClicked=true;
       // Find the index of the verified message in the messages list
       const messageIndex = this.messages.findIndex(
         (msg) => msg.message === verifiedMessage.message
@@ -64,29 +64,13 @@ class ChatModel {
         console.error("The message before is not a valid question.");
         return;
       }
-  
-      // Prepare the content to save
-      // const questionAnswerContent = `Question: ${questionMessage.message}\nAnswer: ${verifiedMessage.message}`;
-      console.log("Question: " + questionMessage.message);
-      console.log("Answer: " + verifiedMessage.message);
-      this.verificationClicked=false;
-      // // Create a unique file name for this Q&A pair
-      // const timestamp = Date.now();
-      // const fileName = `verified-qa/${timestamp}.txt`;
-  
-      // // Create a reference to the storage location
-      // const storageRef = ref(storage, fileName);
-  
-      // // Convert content to a Blob
-      // const fileBlob = new Blob([questionAnswerContent], { type: "text/plain" });
-  
-      // // Upload the file to Firebase Storage
-      // await uploadBytes(storageRef, fileBlob);
-  
-      // console.log(`Q&A saved successfully at ${fileName}`);
+
+      this.verifiedMessages.push({"question":questionMessage.message, "answer": verifiedMessage.message});
+      this.verificationClicked=true;
     } catch (error) {
       console.error("Error saving verified Q&A:", error);
     }
+
   }
   
 }

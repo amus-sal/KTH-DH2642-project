@@ -1,71 +1,78 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, set, onValue} from "./teacherFirebase.js";
+import { getDatabase, ref, get, set, onValue, push} from "./teacherFirebase.js";
 import {firebaseConfig} from "./firebaseConfig.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const questionRef = ref(db, "Question");
-const answerRef = ref(db, "Answer");
-// const PATH ="dinnerModel58";
+const rf = ref(db, "model");
 
 //Dummy test
 // set(ref(db, PATH+"/test"), "dummy");
 
 
-// function modelToPersistence(model){
-//     function transformerCB(dish) {
-//         return dish.id;
-//     }
-//     const dishIds = (model.dishes).map(transformerCB)
-//     dishIds.sort((a, b) => a - b);
-//     return {
-//         numberOfGuests : model.numberOfGuests,
-//         currentDishId : model.currentDishId,
-//         dishes : dishIds
-//     };
-// }
+function modelToPersistence(question, answer){
 
-// function persistenceToModel(data, model) {
-//     console.log("DATA: ", )
-//     function saveToModelACB(dishes) {
-//         model.dishes = dishes;
-//     }
-//     model.setCurrentDishId(data?.currentDishId || null);
-//     model.setNumberOfGuests(data?.numberOfGuests || 2);
-//     return getMenuDetails(data?.dishes || []).then(saveToModelACB);
-// }
+    return {
+        Question : question,
+        Answer : answer
+    };
+}
 
-// function saveToFirebase(model) {
-//     if (model.ready) {
-//         set(rf, modelToPersistence(model));
-//     }
-// }
+function persistenceToModel(data, model) {
+    console.log("DATA: ", data);    
+    function saveToModelACB(data) {
+        model.verifiedMessages.push({"question":data.Question, "answer": data.Answer});
+    }
+    Object.values(data).map(saveToModelACB);
+    return;
+}
 
- function readFromFirebase() {
-    onValue(questionRef, (data)=>{
-        console.log("data.val(): " + data.val());
-        // persistenceToModel(data.val(), model);
+function saveToFirebase(chatModel) {
+    function transformerCB(message) {
+        push(rf, modelToPersistence(message.question, message.answer))
+        // set(rf, modelToPersistence(message.question, message.answer));
+        return (message.question, message.answer);
+    }
+    set(rf, {"model": []});
+    (chatModel.verifiedMessages).map(transformerCB);
+    // console.log("Saved message with question: "+ Question +  " Answer: " + Answer + " ID: " + Id );
+}
+
+ function readFromFirebase(chatModel) {
+    // onValue(rf, (data)=>{
+    //     console.log("data.val(): " + data.val());
+    //     persistenceToModel(data.val(), chatModel);
         
-    })
-    return get(answerRef).then(function convertACB(data){
+    // })
+    return get(rf).then(function convertACB(data){
         console.log("data.val(): " + data.val());
-        return ;
-        // return persistenceToModel(data.val(), model);
+        return persistenceToModel(data.val(), chatModel);
     })
 }
 
-function connectToFirebase(model, watchFunction) {
+function saveQA(chatModel){
+    saveToFirebase(chatModel);
+    // chatModel.verificationClicked = false;
+    // updateHistoryModel();
+}
+
+function connectToFirebase(chatModel,  watchFunction) {
     function checkACB() {
-        return [model.verificationClicked]
+        return [chatModel.verificationClicked]
     }
     function sideEffectACB() { 
-        // saveToFirebase(model)
+        saveQA(chatModel)
+        chatModel.verificationClicked = false;
     }
-    readFromFirebase()
+    readFromFirebase(chatModel)
     console.log("Database connected");
+    console.log("chatModel verified are: " + chatModel.verifiedMessages);
     watchFunction(checkACB, sideEffectACB)
 }
 
 export {connectToFirebase }
 
 
+
+// Read data and display them in History View
+// When clicking verify call saveToFirebase store the QA  and call a function to update History View
