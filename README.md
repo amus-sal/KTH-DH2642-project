@@ -68,7 +68,7 @@ src/
 1. Create a `.env` file in the project root with the following variables:
    ```plaintext
    REACT_APP_FIREBASE_API_KEY=your-firebase-api-key
-   REACT_APP_OPENAI_API_KEY=your-openai-api-key
+   VITE_OPENAI_API_KEY=your-openai-api-key
    ```
 
 2. Install project dependencies:
