@@ -2,6 +2,9 @@ import { observer } from "mobx-react-lite";
 
 import ChatView from "../views/tabs/ChatView";
 
+const openApiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
+
 const ChatTab = observer(({chatModel}) => {
   if (!chatModel) {
     return <div>Error: Chat model is not initialized.</div>;
@@ -14,7 +17,7 @@ const ChatTab = observer(({chatModel}) => {
     };
 
     chatModel.addMessage(userMessage);
-    await chatModel.processMessage(process.env.REACT_APP_OPENAI_API_KEY);
+    await chatModel.processMessage(openApiKey);
   };
   const verifyAnswer = async (verifiedAnswer) => {
     chatModel.saveVerifiedQA(verifiedAnswer)

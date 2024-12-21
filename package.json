@@ -1,47 +1,24 @@
 {
-  "name": "bubo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@chatscope/chat-ui-kit-react": "^2.0.3",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "mobx": "^6.13.5",
-    "mobx-react-lite": "^4.0.7",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.0.1",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4",
-    "dotenv": "^16.4.7",
-    "firebase": "^11.0.2",
-    "stream-chat": "^8.46.0",
-    "stream-chat-react": "^12.7.1",
-    "stream-chat-react-native": "^5.44.1"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+      "start": "vite",
+      "dev": "vite",
+      "build": "vite build",
+      "serve": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+      "vite": "^4.4.11",
+      "@vitejs/plugin-react": "4.2.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+      "firebase": "^9.17.1",
+      "mobx": "^6.8.0",
+      "mobx-react-lite": "^3.4.2",
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0",
+      "react-router-dom": "^6.8.1",
+      "@chatscope/chat-ui-kit-react": "^2.0.3",
+      "axios": "^1.4.0",
+      "dotenv": "^16.0.3"
   }
 }
