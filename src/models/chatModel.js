@@ -20,8 +20,6 @@ class ChatModel {
   }
 
   async processMessage(apiKey) {
-    console.log("chatModel verified are: " + this.verifiedMessages);
-
     this.typing = true;
     try {
       const userMessage = this.messages[this.messages.length - 1];
@@ -41,7 +39,6 @@ class ChatModel {
       });
     } finally {
       this.typing = false;
-      console.log("messages: " + this.messages);
     }
 
   }
@@ -61,8 +58,7 @@ class ChatModel {
   
       // Retrieve the question (previous message in the list)
       const questionMessage = this.messages[messageIndex - 1];
-      // console.log("Wuestion message:" + questionMessage.message, "index: " + messageIndex);
-      // console.log("questionMessage.direction " + questionMessage.direction);
+
       // Validate the direction to ensure it's an incoming question
       if (questionMessage.direction !== "outgoing") {
         console.error("The message before is not a valid question.");
