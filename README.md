@@ -81,7 +81,7 @@ src/
    npm run dev
    ```
 
-   Open [http://localhost:3000](http://localhost:3000) to view the application in your browser.
+   Open [http://localhost:8080](http://localhost:8080) to view the application in your browser.
 
 ---
 
